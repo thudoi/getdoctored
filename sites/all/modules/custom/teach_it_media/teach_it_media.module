@@ -1,0 +1,74 @@
+<?php
+
+/**
+ * Implements hook_node_insert().
+ */
+function teach_it_media_node_insert($node)
+{
+    if($node->type = 'article'){
+        global $base_url;
+        $title = $node->title;
+        module_load_include('inc', 'pathauto', 'pathauto'); // include the inc file for Pathauto module
+
+        pathauto_create_alias('node', 'insert', 'node/'.$node->nid, array('node' => $node), $node->type); // Language is optional
+        $alias = drupal_get_path_alias('node/'.$node->nid);
+        $alias = $base_url.'/'.$alias;
+        $url = '';
+        if(isset($node->field_media_multi['und'][0]['fid'])){
+            $file = file_load($node->field_media['und'][0]['fid']);
+            $e_mine = explode('/',$file->filemime);
+            $mine = $e_mine[0];
+            switch ($mine){
+                case 'video':
+                    $vid = explode('/',$file->uri);
+                    if($e_mine[1] =='youtube'){
+                        $url = 'https://img.youtube.com/vi/'.$vid[3].'/hqdefault.jpg';
+                    }elseif ($e_mine[1]=='vimeo'){
+                        $hash = unserialize(file_get_contents("http://vimeo.com/api/v2/video/".$vid[3].".php"));
+                        $url = $hash[0]["thumbnail_large"];
+                    }else{
+
+                    }
+                    break;
+                case 'image':
+                    $url = file_create_url($file->uri);
+                    break;
+            }
+        }
+        _teach_it_media_tweet($title.' '.$alias,$url);
+    }
+}
+function _teach_it_media_tweet($message,$image) {
+
+// add the codebird library
+    require_once('codebird/src/codebird.php');
+  $consumerKey = 'QP9eZV4lYdkyk3o7GQoHT2WsL';
+  $consumerSecret = '6AXrFAI9A7GkUv1Zf9MwIZIfNsTThlLYcJDmb9RCB7Vr6pFB57';
+  $accessToken = '952565968949035008-hS6NUwKsqqKYaTiHOZAlvZOM9ZoLfav';
+  $accessTokenSecret = 'ePLSHJ1vCn56Sa6oLdEijlx9fMAL7M2nOPrCJRzwkfSBO';
+// note: consumerKey, consumerSecret, accessToken, and accessTokenSecret all come from your twitter app at https://apps.twitter.com/
+    \Codebird\Codebird::setConsumerKey($consumerKey, $consumerSecret);
+    $cb = \Codebird\Codebird::getInstance();
+    $cb->setToken($accessToken, $accessTokenSecret);
+
+//build an array of images to send to twitter
+    if($image){
+        $reply = $cb->media_upload(array(
+            'media' => $image
+        ));
+//upload the file to your twitter account
+        $mediaID = $reply->media_id_string;
+    }else{
+        $mediaID = '';
+    }
+
+//build the data needed to send to twitter, including the tweet and the image id
+    $params = array(
+        'status' => $message,
+        'media_ids' => $mediaID
+    );
+//post the tweet with codebird
+
+    $cb->statuses_update($params);
+
+}
