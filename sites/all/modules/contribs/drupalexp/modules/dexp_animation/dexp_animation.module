@@ -139,7 +139,7 @@ function dexp_animation_form_alter(&$form, &$form_state, $form_id) {
                     'public' => 'public',
                 ),
                 'file_extensions' => 'png gif jpg jpeg',
-                'max_filesize' => '2 MB',
+                'max_filesize' => '12 MB',
                 'uri_scheme' => 'public',
             ),
         ),
