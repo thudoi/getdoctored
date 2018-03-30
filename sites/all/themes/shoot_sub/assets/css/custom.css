@@ -2,3 +2,6 @@
 .bg-cover-right {
   background-repeat: no-repeat;
 }
+.dark-overlay{
+  opacity: 0 !important;
+}
