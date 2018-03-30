@@ -534,6 +534,7 @@ body.preset-dark #section-page-title {
 .bg-cover-right {
   background-size: cover auto;
   background-position: top right !important;
+  background-repeat: no-repeat;
 }
 .bg-cover-left {
   background-size: cover auto;

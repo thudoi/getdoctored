@@ -48,5 +48,7 @@ lessc[] = lessc/custom.less
 scripts[] = assets/js/jquery.easypiechart.js
 scripts[] = assets/js/shoot.js
 
+stylesheets[all][] = assets/css/custom.css
+
 settings[drupalexp_default_preset] = '0'
 settings[drupalexp_direction] = 'default'
