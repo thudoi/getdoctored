@@ -5,3 +5,6 @@
 .tp-dottedoverlay {
   z-index: 0 !important;
 }
+.dexp-parallax {
+  opacity: 0.7 !important;
+}
