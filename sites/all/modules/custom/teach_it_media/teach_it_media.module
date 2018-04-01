@@ -35,17 +35,17 @@ function teach_it_media_node_insert($node)
                     break;
             }
         }
-//        _teach_it_media_tweet($title.' '.$alias,$url);
+        _teach_it_media_tweet($title.' '.$alias,$url);
     }
 }
 function _teach_it_media_tweet($message,$image) {
 
 // add the codebird library
     require_once('codebird/src/codebird.php');
-  $consumerKey = 'QP9eZV4lYdkyk3o7GQoHT2WsL';
-  $consumerSecret = '6AXrFAI9A7GkUv1Zf9MwIZIfNsTThlLYcJDmb9RCB7Vr6pFB57';
-  $accessToken = '952565968949035008-hS6NUwKsqqKYaTiHOZAlvZOM9ZoLfav';
-  $accessTokenSecret = 'ePLSHJ1vCn56Sa6oLdEijlx9fMAL7M2nOPrCJRzwkfSBO';
+  $consumerKey = 'VZ6Ucdv1YJRqBU0lUStGgsDzt';
+  $consumerSecret = 'VeUge8mUWUmGSSwtjkO6pqfj6mm5yiEXsdNn3ArbGckGkujagl';
+  $accessToken = '978810886038196227-HDSqqaUG1z8J0ax7WJfi68iLIavKgQw';
+  $accessTokenSecret = 'CFOweQkHpg9DQvYyya1MKzTGK5U5nRg4M3wcRtOUl4MBq';
 // note: consumerKey, consumerSecret, accessToken, and accessTokenSecret all come from your twitter app at https://apps.twitter.com/
     \Codebird\Codebird::setConsumerKey($consumerKey, $consumerSecret);
     $cb = \Codebird\Codebird::getInstance();
