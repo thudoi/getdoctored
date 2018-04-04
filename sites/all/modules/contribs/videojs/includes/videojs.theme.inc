@@ -5,7 +5,7 @@
  */
 
 /**
- * Preprocess function for videojs.tpl.php when using a playlist.
+ * Preprocess function for videojs.tpl.php.
  */
 function videojs_preprocess_videojs(&$vars) {
   videojs_add();
@@ -26,13 +26,26 @@ function videojs_preprocess_videojs(&$vars) {
     'application/vnd.apple.mpegurl' => 'application/vnd.apple.mpegurl', // .m3u8
   );
 
-  $vars['width'] = !empty($vars['attributes']['width']) ? $vars['attributes']['width'] : variable_get('videojs_width', 640);
-  $vars['height'] = !empty($vars['attributes']['height']) ? $vars['attributes']['height'] : variable_get('videojs_height', 360);
-  $vars['autoplay'] = !!variable_get('videojs_autoplay', FALSE);
+  // Add the defaults to $vars['attributes'] and merge with $vars.
+  $options = videojs_utility::getDisplaySettings($vars['attributes']);
+  $vars = array_merge($vars, $options);
   $vars['items'] = array();
+  $vars['tracks'] = array();
   $vars['poster'] = NULL;
+  $vars['class'] = '';
+
+  if (!empty($vars['attributes']['class'])) {
+    $vars['class'] = implode(' ', $vars['attributes']['class']);
+  }
 
   foreach ($items as $item) {
+    
+    // Add src variables.
+    if (!empty($item['uri'])) {
+      $src = file_create_url($item['uri']);
+      $item['src'] = array('raw' => $src, 'safe' => check_plain($src));
+    }
+    
     if (empty($item['filemime'])) {
       continue;
     }
@@ -43,17 +56,31 @@ function videojs_preprocess_videojs(&$vars) {
         $vars['poster'] = $item['uri'];
       }
 
+      // Filter out tracks.
+      if (strncmp($item['filemime'], 'text/vtt', 8) === 0) {
+        // Add raw/safe for videotype var.
+        $item['filemime'] = array('raw' => $item['filemime'], 'safe' => check_plain($item['filemime']));
+        $vars['tracks'][] = $item + array(
+          'default' => FALSE,
+          'kind' => 'subtitles',
+          'charset' => 'utf-8',
+          'label' => '',
+          'langcode' => '',
+        );
+      }
+
       // Skip unplayable items.
       continue;
     }
 
-    $item['videotype'] = $codecs[$item['filemime']];
+    // Add raw/safe for videotype var.
+    $item['videotype'] = array('raw' => $codecs[$item['filemime']], 'safe' => check_plain($codecs[$item['filemime']]));
 
     $vars['items'][] = $item;
   }
 
-  // Turn the poster image URI into a URL
-  if (!empty($vars['poster'])) {
+  // Turn the poster image URI into a URL, if it isn't an URL already.
+  if (!empty($vars['poster']) && strncmp($vars['poster'], 'http://', 7) !== 0  && strncmp($vars['poster'], 'https://', 8) !== 0) {
     if (empty($vars['posterimage_style'])) {
       $vars['poster'] = file_create_url($vars['poster']);
     }
@@ -64,9 +91,17 @@ function videojs_preprocess_videojs(&$vars) {
 }
 
 /**
- * Preprocess function for videojs.tpl.php when displaying a view as a playlist.
+ * Preprocess function for videojs-media-wysiwyg-preview.tpl.php.
  */
-function template_preprocess_videojs_view(&$vars) {
-  videojs_add();
-  $vars['player_id'] = 'videojs-view-' . str_replace('_', '-', $vars['view']->name);
+function videojs_preprocess_videojs_media_wysiwyg_preview(&$vars) {
+  videojs_preprocess_videojs($vars);
+
+  // If the video has no poster image, borrow one from the media module.
+  // This theme function should only be used by the media module, so assume
+  // it is loaded.
+  if (empty($vars['poster'])) {
+    $poster = drupal_get_path('module', 'media') . '/images/icons/default/video-x-generic.png';
+    $raw = file_create_url($poster);
+    $vars['poster'] = array('raw' => $raw, 'safe' => check_plain($raw));
+  }
 }
