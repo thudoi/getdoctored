@@ -467,14 +467,14 @@ function videojs_get_path() {
  */
 function videojs_libraries_info() {
   $libraries = array();
-
+  module_load_include('inc', 'videojs', 'includes/videojs.utility');
   $libraries['video-js'] = array(
     'name' => 'Video.js',
     'vendor url' => 'http://videojs.com',
     'download url' => 'http://videojs.com',
     'version arguments' => array(
       'file' => 'video.js',
-//      'pattern' => videojs_utility::VERSION_REGEX,
+      'pattern' => videojs_utility::VERSION_REGEX,
       'lines' => 2,
       'cols' => 50,
     ),
