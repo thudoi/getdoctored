@@ -12,6 +12,6 @@ blockquote p:first-child:before {
   content: "\F10E";
   font-family: FontAwesome;
   font-style: normal;
-  font-size: 20px;
+  font-size: 50px;
   padding-right: 5px;
 }
