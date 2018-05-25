@@ -12,11 +12,20 @@ function form_placeholder_admin_settings() {
   $form = array();
 
   $rows = array(
-    array('input, textarea', t('Use all single line text fields and textareas on site.')),
+    array(
+      'input, textarea',
+      t('Use all single line text fields and textareas on site.'),
+    ),
     array('.your-form-class *', t('Use all text fields in given form class.')),
     array('#your-form-id *', t('Use all text fields in given form id.')),
-    array('#your-form-id *:not(textarea)', t('Use all single line text fields but not textareas in given form id.')),
-    array('#your-form-id input:not(input[type=password])', t('Use all single line text fields but not password text fields in given form id.')),
+    array(
+      '#your-form-id *:not(textarea)',
+      t('Use all single line text fields but not textareas in given form id.'),
+    ),
+    array(
+      '#your-form-id input:not(input[type=password])',
+      t('Use all single line text fields but not password text fields in given form id.'),
+    ),
   );
 
   $table = array(

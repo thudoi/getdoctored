@@ -1,12 +1,12 @@
 name = Form Placeholder
-description = Use field label as placeholder for all elements in choosen form.
+description = Use field label as placeholder for all elements in chosen form.
 package = User interface
 core = 7.x
 configure = admin/config/user-interface/form-placeholder
 
-; Information added by Drupal.org packaging script on 2014-07-24
-version = "7.x-1.6"
+; Information added by Drupal.org packaging script on 2018-02-22
+version = "7.x-1.7"
 core = "7.x"
 project = "form_placeholder"
-datestamp = "1406237634"
+datestamp = "1519337591"
 

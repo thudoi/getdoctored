@@ -10,8 +10,7 @@
  * - width: The display width of the image.
  * - height: The display height of the image.
  */
-$alt = isset($post->caption->text)? $post->caption->text:'';
 ?>
 <a class="group" target="_blank" data-instagram-rel="1" href="<?php print $href ?>">
-  <img alt="<?php print $alt; ?>" style="float: left; margin: 0 5px 5px 0px; width: <?php print $width ?>px; height: <?php print $height ?>px;" src="<?php print $src ?>">
+  <img alt="<?php print $caption; ?>" style="float: left; margin: 0 5px 5px 0px; width: <?php print $width ?>px; height: <?php print $height ?>px;" src="<?php print $src ?>">
 </a>

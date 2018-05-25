@@ -11,14 +11,15 @@
 function form_placeholder_enable() {
   drupal_set_message(t(
     'Form Placeholder module is enabled, now You can go to the <a href="@module-config">module configuration page</a>.',
-     array('@module-config' => url('admin/config/user-interface/form-placeholder'))));
+    array('@module-config' => url('admin/config/user-interface/form-placeholder'))));
 }
 
 /**
  * Implements hook_uninstall().
  */
 function form_placeholder_uninstall() {
-  variable_del('form_placeholder_include');
-  variable_del('form_placeholder_exclude');
-  variable_del('form_placeholder_required_indicator');
+  $variables = array('include', 'exclude', 'required_indicator');
+  foreach ($variables as $value) {
+    variable_del('form_placeholder_' . $value);
+  }
 }
