@@ -11,4 +11,4 @@ sites/all/.DS_Store
 sites/all/libraries/.DS_Store
 sites/all/modules/.DS_Store
 .idea/*
-drush
+drush/*
