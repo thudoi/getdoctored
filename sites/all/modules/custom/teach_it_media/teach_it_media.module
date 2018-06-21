@@ -35,17 +35,27 @@ function teach_it_media_node_insert($node)
                     break;
             }
         }
+      if(strpos( $_SERVER['HTTP_HOST'], 'education') !== false || strpos( $_SERVER['HTTP_HOST'], 'teachitinc') !== false){
         _teach_it_media_tweet($title.' '.$alias,$url);
+      }
     }
 }
 function _teach_it_media_tweet($message,$image) {
 
 // add the codebird library
     require_once('codebird/src/codebird.php');
-  $consumerKey = 'VZ6Ucdv1YJRqBU0lUStGgsDzt';
-  $consumerSecret = 'VeUge8mUWUmGSSwtjkO6pqfj6mm5yiEXsdNn3ArbGckGkujagl';
-  $accessToken = '978810886038196227-HDSqqaUG1z8J0ax7WJfi68iLIavKgQw';
-  $accessTokenSecret = 'CFOweQkHpg9DQvYyya1MKzTGK5U5nRg4M3wcRtOUl4MBq';
+
+  if(strpos( $_SERVER['HTTP_HOST'], 'education') !== false){
+    $consumerKey = 'OnO4S0vrojZudtOologD76uJX';
+    $consumerSecret = '8UI3scEcq2jh5wfEy6BIQimD6kY7oRkVJPkeyvmGVTRnyNYmSo';
+    $accessToken = '952565968949035008-2nAoLoDd6MQJ0IzMm6jYJjfzffcvJcD';
+    $accessTokenSecret = 'LUDzrJAWxHar77ejUjvbVaShOLUDsd8lqp9oL29TsZYJ4';
+  }else{
+    $consumerKey = 'ZggIFfl81XKHC1bWmiqHWpHUV';
+    $consumerSecret = 'LunLAs4aqKbG6HEADVkXGd75vBttq2XIOAQQTYwAzparOjZbCr';
+    $accessToken = '225914566-xuy2QIarPGGJdWMmTJUICkPkR0ZT89s1VAzvILQK';
+    $accessTokenSecret = 'e50LyJzqOVNRal5x8qq1mwGEVMAEbfP5MnuAW4bTQb4aS';
+  }
 // note: consumerKey, consumerSecret, accessToken, and accessTokenSecret all come from your twitter app at https://apps.twitter.com/
     \Codebird\Codebird::setConsumerKey($consumerKey, $consumerSecret);
     $cb = \Codebird\Codebird::getInstance();
@@ -71,4 +81,15 @@ function _teach_it_media_tweet($message,$image) {
 
     $cb->statuses_update($params);
 
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function teach_it_media_form_alter(&$form, &$form_state, $form_id)
+{
+  switch ($form_id){
+    case 'contact_site_form':
+      break;
+  }
 }
