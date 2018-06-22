@@ -1,3 +1,3 @@
 <?php
 
-$options['uri'] = 'http://teachit-technology.test';
+$options['uri'] = 'http://teachit-home.test';

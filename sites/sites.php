@@ -54,24 +54,24 @@
  * @see http://drupal.org/documentation/install/multi-site
  */
 
-$sites = [
-  'getdoctored.test'=> 'default',
-  'teachit-home.test'=> 'home',
-  'teachit-education.test'=> 'education',
-  'teachit-technology.test'=> 'technology',
-  'teachit-inc.test'=> 'teachitinc',
-];
-//
 //$sites = [
-//  'getdoctored.com'=> 'default',
-//  'www.getdoctored.com'=> 'default',
-//  'teachit.media'=> 'home',
-//  'www.teachit.media'=> 'home',
-//  'www.teachit.education'=> 'education',
-//  'teachit.education'=> 'education',
-//  'teachit.technology'=> 'technology',
-//  'www.teachit.technology'=> 'technology',
-//  'teachitinc.com'=> 'teachitinc',
-//  'www.teachitinc.com'=> 'teachitinc',
+//  'getdoctored.test'=> 'default',
+//  'teachit-home.test'=> 'home',
+//  'teachit-education.test'=> 'education',
+//  'teachit-technology.test'=> 'technology',
+//  'teachit-inc.test'=> 'teachitinc',
 //];
+
+$sites = [
+  'getdoctored.com'=> 'default',
+  'www.getdoctored.com'=> 'default',
+  'teachit.media'=> 'home',
+  'www.teachit.media'=> 'home',
+  'www.teachit.education'=> 'education',
+  'teachit.education'=> 'education',
+  'teachit.technology'=> 'technology',
+  'www.teachit.technology'=> 'technology',
+  'teachitinc.com'=> 'teachitinc',
+  'www.teachitinc.com'=> 'teachitinc',
+];
 
