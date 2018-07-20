@@ -88,7 +88,7 @@ function _teach_it_media_tweet($message,$image) {
  */
 function teach_it_media_form_alter(&$form, &$form_state, $form_id)
 {
-  drupal_set_message($form_id);
+//  drupal_set_message($form_id);
   switch ($form_id){
     case 'article_node_form':
       $key = '4ebd30e69cb6422190dd1c374a1dd69e';
