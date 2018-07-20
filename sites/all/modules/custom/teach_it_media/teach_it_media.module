@@ -88,8 +88,29 @@ function _teach_it_media_tweet($message,$image) {
  */
 function teach_it_media_form_alter(&$form, &$form_state, $form_id)
 {
+  drupal_set_message($form_id);
   switch ($form_id){
-    case 'contact_site_form':
+    case 'article_node_form':
+      $key = '4ebd30e69cb6422190dd1c374a1dd69e';
+      if(isset($_GET['edit'])){
+        $data = $_GET['edit'];
+        $rand = substr(uniqid('', true), -5);
+          $url = explode('#', $data['url'])[0];
+          $response = drupal_http_request('http://api.embed.ly/1/extract?url='.$url.'&key='.$key);
+          if ($response->code == 200) {
+            $json = json_decode($response->data);
+            $form['title']['#default_value'] = $data['title'];
+            $form_state['input']['title'] = $json->title;
+            if($json->images[0]->url){
+              $image = file_get_contents($json->images[0]->url); // string
+              $file = file_save_data($image, 'public://image_'.$rand.'.png',FILE_EXISTS_REPLACE);
+              $form['field_media']['und'][0]['#default_value']['fid'] = $file->fid;
+            }
+            $form['body']['und'][0]['#default_value'] = $json->content;
+            $form['field_screenshot']['und'][0]['url']['#default_value'] = $data['url'];
+          }
+
+      }
       break;
   }
 }
