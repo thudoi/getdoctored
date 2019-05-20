@@ -58,7 +58,10 @@ $sites = [
   'inc.test'=> 'home',
   'media.teachitinc.com'=> 'home',
   'www.media.teachitinc.com'=> 'home',
-  'teachit-education.test'=> 'education',
-  'teachit-technology.test'=> 'technology',
-  'teachit-inc.test'=> 'teachitinc',
+  'edu.teachitinc.com'=> 'education',
+  'www.edu.teachitinc.com'=> 'education',
+//  'teachit.technology'=> 'technology',
+//  'www.teachit.technology'=> 'technology',
+  'teachitinc.com'=> 'teachitinc',
+  'www.teachitinc.com'=> 'teachitinc',
 ];
