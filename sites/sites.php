@@ -55,7 +55,7 @@
  */
 
 $sites = [
-  'inc.test'=> 'home',
+  'inc.test'=> 'education',
   'media.teachitinc.com'=> 'home',
   'www.media.teachitinc.com'=> 'home',
   'edu.teachitinc.com'=> 'education',
