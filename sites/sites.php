@@ -60,8 +60,6 @@ $sites = [
   'www.media.teachitinc.com'=> 'home',
   'edu.teachitinc.com'=> 'education',
   'www.edu.teachitinc.com'=> 'education',
-//  'teachit.technology'=> 'technology',
-//  'www.teachit.technology'=> 'technology',
   'teachitinc.com'=> 'teachitinc',
   'www.teachitinc.com'=> 'teachitinc',
 ];
